@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManager.Core", "MovieManager.Core\MovieManager.Core.csproj", "{180E45B9-DDD6-4CC3-8F60-7AB09604F502}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManager.ImportConsole", "MovieManager.ImportConsole\MovieManager.ImportConsole.csproj", "{CC9F08AA-EB54-4559-8B0C-0B0D8F0B11D6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{180E45B9-DDD6-4CC3-8F60-7AB09604F502} = {180E45B9-DDD6-4CC3-8F60-7AB09604F502}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManager.Persistence", "MovieManager.Persistence\MovieManager.Persistence.csproj", "{55179704-A3C6-4883-91E1-83937D67D9CC}"
 EndProject

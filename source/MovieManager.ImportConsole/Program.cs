@@ -76,7 +76,8 @@ namespace MovieManager.ImportConsole
 
             // Top Kategorie:
             //   - Jene Kategorie mit den meisten Filmen.
-            //TODO
+            var mostMovies = unitOfWork.CategoryRepository.GetMostMovies();
+            Console.WriteLine($"Kategorie mit den meisten Filmen: '{mostMovies.CategoryName}'; Filme: {mostMovies.CountMovies}");
 
 
             // Jahr der Kategorie "Action":
