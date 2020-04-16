@@ -50,6 +50,19 @@ namespace MovieManager.Persistence
             return res.Year;
         }
 
+        public CategoryStatistic[] GetCategoryStatistic()
+        {
+            return _dbContext.Movies
+                .GroupBy(c => c.Category.CategoryName)
+                  .Select(m => new CategoryStatistic()
+                  {
+                      CategoryName = m.Key,
+                      CountMovies = m.Count(),
+                      TotallyDurationOfMovies = m.Sum(d => d.Duration)
+                  })
+                .OrderBy(count => count.CategoryName)
+                .ToArray();
+        }
 
 
     }

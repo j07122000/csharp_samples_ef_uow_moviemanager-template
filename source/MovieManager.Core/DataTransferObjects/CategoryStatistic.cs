@@ -9,5 +9,7 @@ namespace MovieManager.Core.DataTransferObjects
         public String CategoryName { get; set; }
 
         public int CountMovies { get; set; }
+
+        public int TotallyDurationOfMovies { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace MovieManager.Core.Contracts
         void AddRange(IEnumerable<Category> categories);
         CategoryStatistic GetMostMovies();
         int GetYearWithAction(string categoryAction);
+        CategoryStatistic[] GetCategoryStatistic();
     }
 }
