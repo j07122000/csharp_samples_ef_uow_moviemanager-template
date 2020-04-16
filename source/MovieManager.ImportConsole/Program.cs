@@ -127,10 +127,10 @@ namespace MovieManager.ImportConsole
             int minutesPart = (int)minutes % 60;
             int second = (int)((decimal)(minutes % 1) * 60m);
 
-            string withoutSeconds = $"{hours} h {minutesPart} min";
+            string withoutSeconds = $"{hours:D2} h {minutesPart:D2} min";
             if (withSeconds)
             {
-                return $"{hours} h {minutesPart} min {second} sec";
+                return $"{hours:D2} h {minutesPart:D2} min {second:D2} sec";
             }
             return withoutSeconds;
         }
