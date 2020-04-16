@@ -82,7 +82,9 @@ namespace MovieManager.ImportConsole
 
             // Jahr der Kategorie "Action":
             //  - In welchem Jahr wurden die meisten Action-Filme veröffentlicht?
-            //TODO
+            var yearAction = unitOfWork.CategoryRepository.GetYearWithAction("Action");
+            Console.WriteLine($"Jahr der Action-Filme: {yearAction}");
+
 
 
             // Kategorie Auswertung (Teil 1):
@@ -107,10 +109,10 @@ namespace MovieManager.ImportConsole
             int minutesPart = (int)minutes % 60;
             int second = (int)((decimal)(minutes % 1) * 60m);
 
-            string withoutSeconds = $"{hours}h {minutesPart}min";
+            string withoutSeconds = $"{hours} h {minutesPart} min";
             if (withSeconds)
             {
-                return $"{hours}h {minutesPart}min {second}sec";
+                return $"{hours} h {minutesPart} min {second} sec";
             }
             return withoutSeconds;
         }

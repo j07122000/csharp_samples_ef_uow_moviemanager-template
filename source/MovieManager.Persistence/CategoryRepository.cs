@@ -35,6 +35,22 @@ namespace MovieManager.Persistence
 
         }
 
+        public int GetYearWithAction(string categoryAction)
+        {
+            var res = _dbContext.Movies
+                .Where(cat => cat.Category.CategoryName == categoryAction)
+                .GroupBy(y => y.Year)
+                .Select(s => new
+                {
+                    Year = s.Key,
+                    Count = s.Count()
+                })
+                .OrderByDescending(m => m.Count).First();
+
+            return res.Year;
+        }
+
+
 
     }
 }
