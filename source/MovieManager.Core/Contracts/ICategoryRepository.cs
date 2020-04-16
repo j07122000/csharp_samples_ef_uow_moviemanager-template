@@ -10,5 +10,6 @@ namespace MovieManager.Core.Contracts
         CategoryStatistic GetMostMovies();
         int GetYearWithAction(string categoryAction);
         CategoryStatistic[] GetCategoryStatistic();
+        (string CategoryName, double AverageDuration)[] GetAverageDuration();
     }
 }

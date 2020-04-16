@@ -1,6 +1,7 @@
 ﻿using MovieManager.Core.Contracts;
 using MovieManager.Core.DataTransferObjects;
 using MovieManager.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -61,6 +62,23 @@ namespace MovieManager.Persistence
                       TotallyDurationOfMovies = m.Sum(d => d.Duration)
                   })
                 .OrderBy(count => count.CategoryName)
+                .ToArray();
+        }
+        public (string CategoryName, double AverageDuration)[] GetAverageDuration()
+        {
+            var res = _dbContext
+                .Categories
+                .Select(c => new
+                {
+                    CategoryName = c.CategoryName,
+                    AverageDuration = c.Movies.Average(m => m.Duration)
+                })
+                .OrderByDescending(s => s.AverageDuration)
+                .ThenBy(c => c.CategoryName)
+                .ToArray();
+
+           return res
+                .Select(c => ValueTuple.Create(c.CategoryName, c.AverageDuration))
                 .ToArray();
         }
 

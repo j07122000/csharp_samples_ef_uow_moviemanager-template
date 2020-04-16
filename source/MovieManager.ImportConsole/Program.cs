@@ -106,7 +106,14 @@ namespace MovieManager.ImportConsole
             //   - Absteigend sortiert nach der durchschnittlichen Dauer der Filme.
             //     Bei gleicher Dauer dann nach dem Namen der Kategorie aufsteigend sortieren.
             //   - Die Gesamtdauer soll in Stunden, Minuten und Sekunden angezeigt werden!
-            //TODO
+            Console.WriteLine();
+            Console.WriteLine("Kategorie    durchschn. Gesamtdauer");
+            Console.WriteLine("===================================");
+            foreach (var statistic in unitOfWork.CategoryRepository.GetAverageDuration())
+            {
+                Console.WriteLine($"{statistic.CategoryName,-12} {GetDurationAsString(statistic.AverageDuration),-12}");
+            }
+
         }
 
 
