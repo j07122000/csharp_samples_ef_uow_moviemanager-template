@@ -1,7 +1,10 @@
 ﻿using MovieManager.Core;
+using MovieManager.Core.Contracts;
 using MovieManager.Core.Entities;
 using MovieManager.Persistence;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MovieManager.ImportConsole
@@ -28,10 +31,10 @@ namespace MovieManager.ImportConsole
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 Console.WriteLine("Datenbank löschen");
-                //TODO: Datenbank löschen
+                unitOfWork.DeleteDatabase();
 
                 Console.WriteLine("Datenbank migrieren");
-                //TODO: Migrationen anstoßen
+                unitOfWork.MigrateDatabase();
 
                 Console.WriteLine("Movies/Categories werden eingelesen");
 
@@ -42,13 +45,18 @@ namespace MovieManager.ImportConsole
                     return;
                 }
 
-                var categories = Enumerable.Empty<Movie>();
-                //TODO: Kategorien ermitteln
+                 var categories = movies
+                    .Select(m => m.Category )
+                    .Distinct();
+                
 
                 Console.WriteLine($"  Es wurden {movies.Count()} Movies in {categories.Count()} Kategorien eingelesen!");
 
-                //TODO: Movies und Kategorien in die Datenbank schreiben
+                unitOfWork.CategoryRepository.AddRange(categories);
+                unitOfWork.Save();
 
+                unitOfWork.MovieRepository.AddRange(movies);
+                unitOfWork.Save();
                 Console.WriteLine();
             }
         }
@@ -59,10 +67,11 @@ namespace MovieManager.ImportConsole
             Console.WriteLine("        Statistik");
             Console.WriteLine("***************************");
 
-
+            using IUnitOfWork unitOfWork = new UnitOfWork();
             // Längster Film: Bei mehreren gleichlangen Filmen, soll jener angezeigt werden, dessen Titel im Alphabet am weitesten vorne steht.
             // Die Dauer des längsten Films soll in Stunden und Minuten angezeigt werden!
-            //TODO
+            Movie longestMovie = unitOfWork.MovieRepository.GetLongest();
+            Console.WriteLine($"Längster Film: {longestMovie.Title}; Länge: {GetDurationAsString(longestMovie.Duration, false)}");
 
 
             // Top Kategorie:
@@ -90,9 +99,19 @@ namespace MovieManager.ImportConsole
             //TODO
         }
 
+      
         private static string GetDurationAsString(double minutes, bool withSeconds = true)
         {
-            throw new NotImplementedException();
+            int hours = (int)minutes / 60;
+            int minutesPart = (int)minutes % 60;
+            int second = (int)((decimal)(minutes % 1) * 60m);
+
+            string withoutSeconds = $"{hours}h {minutesPart}min";
+            if (withSeconds)
+            {
+                return $"{hours}h {minutesPart}min {second}sec";
+            }
+            return withoutSeconds;
         }
     }
 }

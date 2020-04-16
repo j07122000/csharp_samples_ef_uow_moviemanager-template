@@ -1,6 +1,8 @@
 ﻿using MovieManager.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Utils;
 
 namespace MovieManager.Core
 {
@@ -13,8 +15,27 @@ namespace MovieManager.Core
         /// </summary>
         public static IEnumerable<Movie> ReadFromCsv()
         {
-            throw new NotImplementedException();
+            string[][] csvMovies = MyFile.ReadStringMatrixFromCsv(Filename, true);
+
+            var category = csvMovies
+                .GroupBy(line => line[2])
+                .Select(s => new Category
+                {
+                    CategoryName = s.Key
+                });
+
+            var movies = csvMovies
+                .Select(line => new Movie()
+                {
+                    Category = category.Single(c => c.CategoryName == line[2]),
+                    Duration = int.Parse(line[3]),
+                    Title = line[0],
+                    Year = int.Parse(line[1]),
+                }).ToArray();
+
+            return movies;
         }
+       
 
     }
 }

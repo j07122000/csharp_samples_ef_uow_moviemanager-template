@@ -6,6 +6,10 @@ namespace MovieManager.Core.Entities
 {
     public class Category : EntityObject
     {
+        private Category category;
+
+       
+
         [Required]
         public String CategoryName { get; set; }
 

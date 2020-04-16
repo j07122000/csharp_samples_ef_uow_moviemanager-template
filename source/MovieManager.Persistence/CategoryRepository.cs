@@ -1,4 +1,6 @@
 ﻿using MovieManager.Core.Contracts;
+using MovieManager.Core.Entities;
+using System.Collections.Generic;
 
 namespace MovieManager.Persistence
 {
@@ -10,6 +12,12 @@ namespace MovieManager.Persistence
         {
             _dbContext = dbContext;
         }
+
+        public void AddRange(IEnumerable<Category> categories)
+        {
+            _dbContext.Categories.AddRange(categories);
+        }
+
 
     }
 }
