@@ -19,7 +19,8 @@ namespace MovieManager.Persistence
         public Movie GetLongest()
         {
             return _dbContext.Movies
-                .OrderByDescending(m => m.Title)
+                .OrderByDescending(m => m.Duration)
+                .ThenBy(m => m.Title)
                 .FirstOrDefault();
         }
 
