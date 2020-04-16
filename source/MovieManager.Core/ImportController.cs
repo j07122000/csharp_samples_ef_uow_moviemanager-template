@@ -22,9 +22,9 @@ namespace MovieManager.Core
                 .Select(s => new Category
                 {
                     CategoryName = s.Key
-                });
+                }).ToArray();
 
-            var movies = csvMovies
+            Movie[] movies = csvMovies
                 .Select(line => new Movie()
                 {
                     Category = category.Single(c => c.CategoryName == line[2]),

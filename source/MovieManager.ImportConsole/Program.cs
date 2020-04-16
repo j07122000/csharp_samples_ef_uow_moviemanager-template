@@ -72,26 +72,26 @@ namespace MovieManager.ImportConsole
             // Die Dauer des längsten Films soll in Stunden und Minuten angezeigt werden!
             Movie longestMovie = unitOfWork.MovieRepository.GetLongest();
             Console.WriteLine($"Längster Film: {longestMovie.Title}; Länge: {GetDurationAsString(longestMovie.Duration, false)}");
+            Console.WriteLine();
 
-
-            // Top Kategorie:
-            //   - Jene Kategorie mit den meisten Filmen.
-            var mostMovies = unitOfWork.CategoryRepository.GetMostMovies();
+           // Top Kategorie:
+           //   - Jene Kategorie mit den meisten Filmen.
+           var mostMovies = unitOfWork.CategoryRepository.GetMostMovies();
             Console.WriteLine($"Kategorie mit den meisten Filmen: '{mostMovies.CategoryName}'; Filme: {mostMovies.CountMovies}");
+            Console.WriteLine();
 
-
-            // Jahr der Kategorie "Action":
-            //  - In welchem Jahr wurden die meisten Action-Filme veröffentlicht?
-            var yearAction = unitOfWork.CategoryRepository.GetYearWithAction("Action");
+           // Jahr der Kategorie "Action":
+           //  - In welchem Jahr wurden die meisten Action-Filme veröffentlicht?
+           var yearAction = unitOfWork.CategoryRepository.GetYearWithAction("Action");
             Console.WriteLine($"Jahr der Action-Filme: {yearAction}");
+            Console.WriteLine();
 
 
-
-            // Kategorie Auswertung (Teil 1):
-            //   - Eine Liste in der je Kategorie die Anzahl der Filme und deren Gesamtdauer dargestellt wird.
-            //   - Sortiert nach dem Namen der Kategorie (aufsteigend).
-            //   - Die Gesamtdauer soll in Stunden und Minuten angezeigt werden!
-            Console.WriteLine("Kategorie Auswertung: ");
+           // Kategorie Auswertung (Teil 1):
+           //   - Eine Liste in der je Kategorie die Anzahl der Filme und deren Gesamtdauer dargestellt wird.
+           //   - Sortiert nach dem Namen der Kategorie (aufsteigend).
+           //   - Die Gesamtdauer soll in Stunden und Minuten angezeigt werden!
+           Console.WriteLine("Kategorie Auswertung: ");
             Console.WriteLine();
             Console.WriteLine("Kategorie    Anzahl      Gesamtdauer");
             Console.WriteLine("====================================");
@@ -99,6 +99,8 @@ namespace MovieManager.ImportConsole
             {
                 Console.WriteLine($"{statistic.CategoryName,-12} {statistic.CountMovies,-12} {GetDurationAsString(statistic.TotallyDurationOfMovies, false),-12}");
             }
+            Console.WriteLine();
+
 
 
             // Kategorie Auswertung (Teil 2):
@@ -113,6 +115,8 @@ namespace MovieManager.ImportConsole
             {
                 Console.WriteLine($"{statistic.CategoryName,-12} {GetDurationAsString(statistic.AverageDuration),-12}");
             }
+            Console.WriteLine();
+
 
         }
 
