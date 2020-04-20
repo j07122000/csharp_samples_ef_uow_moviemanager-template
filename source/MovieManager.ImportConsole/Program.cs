@@ -130,7 +130,7 @@ namespace MovieManager.ImportConsole
             string withoutSeconds = $"{hours:D2} h {minutesPart:D2} min";
             if (withSeconds)
             {
-                return $"{hours:D2} h {minutesPart:D2} min {second:D2} sec";
+                return $"{withoutSeconds} {second:D2} sec";
             }
             return withoutSeconds;
         }
